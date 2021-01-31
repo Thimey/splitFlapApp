@@ -1,0 +1,1 @@
+export const API = 'https://s308z0gzr0.execute-api.ap-southeast-2.amazonaws.com/dev';
