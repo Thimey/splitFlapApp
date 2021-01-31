@@ -1,9 +1,8 @@
-import axios from 'axios';
 import { API } from './apiEndpoint';
 
-export async function setDisplay(characterDisplays: string[]) {
+export async function publishDisplays(characterDisplays: string[]) {
     try {
-        const resp = await fetch(`${API}/splitFlap/setDisplay`, {
+        const resp = await fetch(`${API}/splitFlap/publishDisplays`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

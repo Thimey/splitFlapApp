@@ -5,7 +5,7 @@ const iotData = new AWS.IotData({
   endpoint: 'a1inih3er5l0sk-ats.iot.ap-southeast-2.amazonaws.com',
 });
 
-module.exports.setDisplay = async (event) => {
+module.exports.publishDisplays = async (event) => {
   console.info(JSON.stringify(event));
   const { characterDisplays } = JSON.parse(event.body);
 
