@@ -5,16 +5,9 @@ const iotData = new AWS.IotData({
   endpoint: process.env.SPLITFLAP_IOT_ENDPOINT,
 });
 
-module.exports.publishDisplays = async (event) => {
-  console.info(JSON.stringify(event));
-  const { characterDisplays, stepDelay } = JSON.parse(event.body);
-
+module.exports.publishDisableMotors = async (event) => {
   const params = {
-      topic: "splitFlap1/display",
-      payload: JSON.stringify({
-        characterDisplays,
-        stepDelay,
-      }),
+      topic: "splitFlap1/disableMotors",
       qos: 0
   };
 
@@ -26,9 +19,5 @@ module.exports.publishDisplays = async (event) => {
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Credentials': true,
       },
-      body: JSON.stringify({
-        characterDisplays,
-        stepDelay,
-      }),
   }
 };

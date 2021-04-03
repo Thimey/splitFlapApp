@@ -1,19 +1,5 @@
-import { API } from './apiEndpoint';
+import { publishEvent } from './api';
 
-export async function publishDisplays(characterDisplays: string[]) {
-    try {
-        const resp = await fetch(`${API}/splitFlap/publishDisplays`, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            mode: 'cors',
-            body: JSON.stringify({ characterDisplays })
-        })
-
-        return resp.json();
-    } catch (error) {
-        console.error(error);
-    }
+export async function publishDisplays(characterDisplays: string[], stepDelay: number) {
+    return publishEvent({ name: 'publishDisplays', payload: { characterDisplays, stepDelay } })
 };
