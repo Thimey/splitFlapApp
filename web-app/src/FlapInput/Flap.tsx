@@ -44,7 +44,7 @@ export interface Props {
     blink: boolean
 }
 
-export const FlapInput: React.FC<Props> = ({ character, blink }) => {
+export const Flap: React.FC<Props> = ({ character, blink }) => {
     const classes = useStyles()
 
     return (
