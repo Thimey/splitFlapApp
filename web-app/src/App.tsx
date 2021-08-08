@@ -1,24 +1,20 @@
 import React, { useState } from 'react'
 import { createUseStyles } from 'react-jss'
+import './App.css';
 
 import { publishDisplays } from './services/publishDisplays'
-import { publishReset } from './services/publishReset'
-import { publishEnableMotors } from './services/publishEnableMotors'
-import { publishDisableMotors } from './services/publishDisableMotors'
-import './App.css';
 import { FlapInput } from './FlapInput'
-
-const NUMBER_OF_SPLIT_FLAPS = 8
+import { Options } from './Options'
 
 const useStyles = createUseStyles({})
 
 function App() {
   const classes = useStyles()
+
+  const [showOptions, setShowOptions] = useState(false);
   const [delay, setDelay] = useState(500);
   const [displays, setDisplays] = useState<string[]>([])
-  const [publishImmediately, setPublishImmediately] = useState(false);
-  const handleDelayChange = (e: React.ChangeEvent<HTMLInputElement>) => setDelay(Number(e.target.value));
-  const handlePublishOptionChange = (e: React.ChangeEvent<HTMLInputElement>) => setPublishImmediately(e.target.checked);
+  const [publishImmediately, setPublishImmediately] = useState(true);
 
   const handlePublishDisplays = (displaysToPublish: string[]) => {
     publishDisplays(displaysToPublish, delay);
@@ -37,15 +33,22 @@ function App() {
 
   return (
     <div className="App">
+      <h2>Flap me</h2>
 
       <FlapInput onDisplaySubmitted={handleOnDisplaySubmitted} />
 
-      <button onClick={() => publishReset()}>Reset</button>
-      <button onClick={() => publishDisableMotors()}>Disable Motors</button>
-      <button onClick={() => publishEnableMotors()}>Enable Motors</button>
-      <input type="number" onChange={handleDelayChange} value={delay} />
-      <input id='publish' type='checkbox' onChange={handlePublishOptionChange} checked={publishImmediately} />
-      <label htmlFor='publish' >Publish on Enter</label>
+      <button onClick={() => setShowOptions(!showOptions)}>Options</button>
+
+      {
+        showOptions && (
+          <Options
+            delay={delay}
+            publishImmediately={publishImmediately}
+            setDelay={d => setDelay(d)}
+            setPublishImmediately={p => setPublishImmediately(p)}
+          />
+        )
+      }
 
       {
         !publishImmediately && (

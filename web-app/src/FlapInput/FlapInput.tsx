@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { createUseStyles } from 'react-jss'
 
 import { Flap } from './Flap'
@@ -19,7 +19,8 @@ const useStyles = createUseStyles({
     },
     hide: {
         opacity: 0,
-        position: 'absolute'
+        position: 'absolute',
+        top: '-500px',
     },
     flapsFocused: {
         border: "1px solid"
@@ -32,7 +33,7 @@ export interface Props {
 
 export const FlapInput: React.FC<Props> = ({ onDisplaySubmitted }) => {
     const classes = useStyles()
-    const [displayInput, setDisplayInput] = useState('');
+    const [displayInput, setDisplayInput] = useState('')
     const [displayInputFocused, setDisplayInputFocused] = useState(false)
     const [cursorPosition, setCursorPosition] = useState(0)
     const inputRef = React.useRef<HTMLTextAreaElement | null>(null)
@@ -42,11 +43,18 @@ export const FlapInput: React.FC<Props> = ({ onDisplaySubmitted }) => {
     }
     const handleInputKeyUp = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.key === 'Enter') {
-            onDisplaySubmitted(displayInput);
-            setDisplayInput('');
+            onDisplaySubmitted(displayInput)
+            setDisplayInput('')
         }
         setCursorPosition(inputRef.current?.selectionStart || 0)
     }
+
+    // Reset the cursor whenever input cleared
+    useEffect(() => {
+        if (!displayInput) {
+            setCursorPosition(0)
+        }
+    }, [displayInput])
 
     return (
         <>
@@ -64,7 +72,6 @@ export const FlapInput: React.FC<Props> = ({ onDisplaySubmitted }) => {
                     ))
                 }
             </div>
-
             <textarea
                 ref={inputRef}
                 maxLength={NUMBER_OF_SPLIT_FLAPS}
@@ -76,5 +83,5 @@ export const FlapInput: React.FC<Props> = ({ onDisplaySubmitted }) => {
                 value={displayInput}
             />
         </>
-    );
+    )
 }
