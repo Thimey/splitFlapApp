@@ -50,12 +50,12 @@ functions:
           path: /splitFlap/publishDisableMotors
           method: post
           cors: true
-  publishEnableMotors:
-    handler: src/publishEnableMotorsHandler.publishEnableMotors
+  publishStartTimer:
+    handler: src/publishStartTimerHandler.publishStartTimer
     environment:
       SPLITFLAP_IOT_ENDPOINT: ${env:SPLITFLAP_IOT_ENDPOINT}
     events:
       - http:
-          path: /splitFlap/publishEnableMotors
+          path: /splitFlap/publishStartTimer
           method: post
           cors: true

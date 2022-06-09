@@ -4,8 +4,9 @@ type DisableMotorsEvent = { name: 'publishDisableMotors', payload?: {} };
 type EnableMotorsEvent = { name: 'publishEnableMotors', payload?: {} };
 type ResetEvent = { name: 'publishReset', payload?: {} };
 type DisplaysEvent = { name: 'publishDisplays', payload: { characterDisplays: string[], stepDelay: number } };
+type StartTimerEvent = { name: 'publishStartTimer', payload: { seconds: number } };
 
-export type Event = DisableMotorsEvent | EnableMotorsEvent | ResetEvent | DisplaysEvent
+export type Event = DisableMotorsEvent | EnableMotorsEvent | ResetEvent | DisplaysEvent | StartTimerEvent
 
 
 export async function publishEvent(event: Event) {

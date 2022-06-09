@@ -16,6 +16,14 @@ function App() {
   const [displays, setDisplays] = useState<string[]>([])
   const [publishImmediately, setPublishImmediately] = useState(true);
 
+  // React.useEffect(() => {
+  //   const savedState = localStorage.getItem('characterDisplays')
+
+  //   if (savedState) {
+  //     setDisplays(JSON.parse(savedState));
+  //   }
+  // }, [])
+
   const handlePublishDisplays = (displaysToPublish: string[]) => {
     publishDisplays(displaysToPublish, delay);
     setDisplays([]);

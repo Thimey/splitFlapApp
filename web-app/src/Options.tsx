@@ -4,6 +4,7 @@ import { createUseStyles } from 'react-jss'
 import { publishReset } from './services/publishReset'
 import { publishEnableMotors } from './services/publishEnableMotors'
 import { publishDisableMotors } from './services/publishDisableMotors'
+import { publishStartTimer } from './services/publishStartTimer'
 
 const useStyles = createUseStyles({})
 
@@ -29,6 +30,8 @@ export const Options: React.FC<Props> = ({
             <button onClick={() => publishReset()}>Reset</button>
             <button onClick={() => publishDisableMotors()}>Disable Motors</button>
             <button onClick={() => publishEnableMotors()}>Enable Motors</button>
+            <button onClick={() => publishEnableMotors()}>Enable Motors</button>
+            <button onClick={() => publishStartTimer()}>Test timer</button>
             <input type="number" onChange={handleDelayChange} value={delay} />
             <input id='publish' type='checkbox' onChange={handlePublishOptionChange} checked={publishImmediately} />
             <label htmlFor='publish' >Publish on Enter</label>
